@@ -18,6 +18,7 @@ namespace CSharpSimpleCRUD.Controllers
                 return View(model);
             }
 
+            model.SaveToDatabase();
             ViewBag.SuccessMessage = "Your form has been submitted successfully.";
             ModelState.Clear();
             return View();

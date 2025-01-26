@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.Data.SqlClient;
 
 namespace CSharpSimpleCRUD.Models
 {
@@ -31,5 +32,39 @@ namespace CSharpSimpleCRUD.Models
 
         [Required(ErrorMessage = "The T-shirt Size is required.")]
         public string TShirtSize { get; set; } = "";
+
+        public void SaveToDatabase()
+        {
+            string connectionString = "Data Source=LAPTOP-GM3E4EUK;Initial Catalog=TestDatabase;Integrated Security=True;Trust Server Certificate=True";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "INSERT INTO Participants (FirstName, LastName, Address, PhoneNumber, Email, BirthDate, Gender, TShirtSize) " +
+                                   "VALUES (@FirstName, @LastName, @Address, @PhoneNumber, @Email, @BirthDate, @Gender, @TShirtSize)";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@FirstName", FirstName);
+                        command.Parameters.AddWithValue("@LastName", LastName);
+                        command.Parameters.AddWithValue("@Address", Address);
+                        command.Parameters.AddWithValue("@PhoneNumber", PhoneNumber);
+                        command.Parameters.AddWithValue("@Email", Email);
+                        command.Parameters.AddWithValue("@BirthDate", BirthDate);
+                        command.Parameters.AddWithValue("@Gender", Gender);
+                        command.Parameters.AddWithValue("@TShirtSize", TShirtSize);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
     }
 }

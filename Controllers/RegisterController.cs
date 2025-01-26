@@ -11,7 +11,7 @@ namespace CSharpSimpleCRUD.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(RegisterModel model)
+        public IActionResult Index(ParticipantModel model)
         {
             if (!ModelState.IsValid)
             {

@@ -2,7 +2,7 @@
 
 namespace CSharpSimpleCRUD.Models
 {
-    public class RegisterModel
+    public class ParticipantModel
     {
         public int ParticipantId { get; set; }
 

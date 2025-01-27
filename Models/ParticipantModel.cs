@@ -5,7 +5,7 @@ namespace CSharpSimpleCRUD.Models
 {
     public class ParticipantModel
     {
-        public int ParticipantId { get; set; }
+        public string? ParticipantId { get; set; }
 
         [Required(ErrorMessage = "The First Name is required.")]
         public string FirstName { get; set; } = "";

@@ -66,5 +66,50 @@ namespace CSharpSimpleCRUD.Models
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
+
+        public List<ParticipantModel> FetchFromDatabase()
+        {
+            List<ParticipantModel> listParticipants = new List<ParticipantModel>();
+
+            string connectionString = "Data Source=LAPTOP-GM3E4EUK;Initial Catalog=TestDatabase;Integrated Security=True;Trust Server Certificate=True";
+            
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "SELECT * FROM Participants";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                ParticipantModel participant = new ParticipantModel();
+                                participant.ParticipantId = "" + reader.GetInt32(0);
+                                participant.FirstName = reader.GetString(1);
+                                participant.LastName = reader.GetString(2);
+                                participant.Address = reader.GetString(3);
+                                participant.PhoneNumber = reader.GetString(4);
+                                participant.Email = reader.GetString(5);
+                                participant.BirthDate = reader.GetDateTime(6);
+                                participant.Gender = reader.GetString(7);
+                                participant.TShirtSize = reader.GetString(8);
+
+                                listParticipants.Add(participant);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+
+            return listParticipants;
+        }
     }
 }

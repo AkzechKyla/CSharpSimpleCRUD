@@ -32,5 +32,13 @@ namespace CSharpSimpleCRUD.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Delete(int id)
+        {
+            ParticipantModel participant = new ParticipantModel();
+            participant.DeleteFromDatabase(id);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

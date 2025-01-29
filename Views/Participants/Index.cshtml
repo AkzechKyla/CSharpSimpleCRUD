@@ -39,7 +39,7 @@
                 <td>
                     <div class="d-grid">
                         <a class="btn btn-primary btn-sm w-100" asp-controller="Participants" asp-action="Edit" asp-route-id="@participant.ParticipantId">Edit</a>
-                        <a class="btn btn-danger btn-sm w-100" href="/Participants/Delete?id=">Delete</a>
+                        <a class="btn btn-danger btn-sm w-100" asp-controller="Participants" asp-action="Delete" asp-route-id="@participant.ParticipantId">Delete</a>
                     </div>
                 </td>
             </tr>

@@ -196,5 +196,28 @@ namespace CSharpSimpleCRUD.Models
 
             return participant;
         }
+
+        public void DeleteFromDatabase(int id)
+        {
+            string connectionString = "Data Source=LAPTOP-GM3E4EUK;Initial Catalog=TestDatabase;Integrated Security=True;Trust Server Certificate=True";
+            string query = "DELETE FROM Participants WHERE ParticipantId = @ParticipantId";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ParticipantId", id);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
     }
 }

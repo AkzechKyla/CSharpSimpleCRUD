@@ -19,5 +19,18 @@ namespace CSharpSimpleCRUD.Controllers
             return View(participant);
         }
 
+        [HttpPost]
+        public IActionResult Edit(ParticipantModel participantModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(participantModel);
+            }
+
+            participantModel.SaveToDatabase(participantModel);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

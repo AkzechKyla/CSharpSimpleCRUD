@@ -71,6 +71,51 @@ namespace CSharpSimpleCRUD.Models
             }
         }
 
+        public void SaveToDatabase(ParticipantModel participant)
+        {
+            string connectionString = "Data Source=LAPTOP-GM3E4EUK;Initial Catalog=TestDatabase;Integrated Security=True;Trust Server Certificate=True";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = @"
+                        UPDATE Participants 
+                        SET FirstName = @FirstName, 
+                            LastName = @LastName, 
+                            Address = @Address, 
+                            PhoneNumber = @PhoneNumber, 
+                            Email = @Email, 
+                            BirthDate = @BirthDate, 
+                            Gender = @Gender, 
+                            TShirtSize = @TShirtSize, 
+                            RegisterDate = @RegisterDate 
+                        WHERE ParticipantId = @ParticipantId";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@ParticipantId", participant.ParticipantId);
+                        command.Parameters.AddWithValue("@FirstName", participant.FirstName);
+                        command.Parameters.AddWithValue("@LastName", participant.LastName);
+                        command.Parameters.AddWithValue("@Address", participant.Address);
+                        command.Parameters.AddWithValue("@PhoneNumber", participant.PhoneNumber);
+                        command.Parameters.AddWithValue("@Email", participant.Email);
+                        command.Parameters.AddWithValue("@BirthDate", participant.BirthDate);
+                        command.Parameters.AddWithValue("@Gender", participant.Gender);
+                        command.Parameters.AddWithValue("@TShirtSize", participant.TShirtSize);
+                        command.Parameters.AddWithValue("@RegisterDate", participant.RegisterDate);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
         public List<ParticipantModel> FetchFromDatabase()
         {
             List<ParticipantModel> listParticipants = new List<ParticipantModel>();

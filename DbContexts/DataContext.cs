@@ -9,6 +9,6 @@ namespace CSharpSimpleCRUD.DbContexts
         {
         }
 
-        public DbSet<Event> Events => Set<Event>();
+        public DbSet<Event> Events { get; set; }
     } 
 }

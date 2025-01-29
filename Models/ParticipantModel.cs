@@ -33,6 +33,9 @@ namespace CSharpSimpleCRUD.Models
         [Required(ErrorMessage = "The T-shirt Size is required.")]
         public string TShirtSize { get; set; } = "";
 
+        [DataType(DataType.Date)]
+        public DateTime RegisterDate { get; set; } = DateTime.Now;
+
         public void SaveToDatabase()
         {
             string connectionString = "Data Source=LAPTOP-GM3E4EUK;Initial Catalog=TestDatabase;Integrated Security=True;Trust Server Certificate=True";
@@ -43,8 +46,8 @@ namespace CSharpSimpleCRUD.Models
                 {
                     connection.Open();
 
-                    string query = "INSERT INTO Participants (FirstName, LastName, Address, PhoneNumber, Email, BirthDate, Gender, TShirtSize) " +
-                                   "VALUES (@FirstName, @LastName, @Address, @PhoneNumber, @Email, @BirthDate, @Gender, @TShirtSize)";
+                    string query = "INSERT INTO Participants (FirstName, LastName, Address, PhoneNumber, Email, BirthDate, Gender, TShirtSize, RegisterDate) " +
+                                   "VALUES (@FirstName, @LastName, @Address, @PhoneNumber, @Email, @BirthDate, @Gender, @TShirtSize, @RegisterDate)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -56,6 +59,7 @@ namespace CSharpSimpleCRUD.Models
                         command.Parameters.AddWithValue("@BirthDate", BirthDate);
                         command.Parameters.AddWithValue("@Gender", Gender);
                         command.Parameters.AddWithValue("@TShirtSize", TShirtSize);
+                        command.Parameters.AddWithValue("@RegisterDate", RegisterDate);
 
                         command.ExecuteNonQuery();
                     }
@@ -97,6 +101,7 @@ namespace CSharpSimpleCRUD.Models
                                 participant.BirthDate = reader.GetDateTime(6);
                                 participant.Gender = reader.GetString(7);
                                 participant.TShirtSize = reader.GetString(8);
+                                participant.RegisterDate = reader.GetDateTime(9);
 
                                 listParticipants.Add(participant);
                             }

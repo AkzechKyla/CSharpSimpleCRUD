@@ -1,0 +1,122 @@
+﻿@model CSharpSimpleCRUD.Entities.Event
+@{
+
+}
+
+<div class="row">
+    <div class="col-lg-9 mx-auto rounded border p-4">
+        <h2 class="text-center mb-3">Edit Event</h2>
+
+        <form method="post">
+            <input type="hidden" asp-for="EventId" />
+
+            <!-- First Name -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">First Name*</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="FirstName" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Last Name*</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="LastName" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Email Address -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Email Address*</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Phone Number*</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="PhoneNumber" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Event Title -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Event Title*</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="EventTitle" />
+                    <span asp-validation-for="EventTitle" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Event Date -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Event Date*</label>
+                <div class="col-sm-8">
+                    <input type="date" class="form-control" asp-for="EventDate" />
+                    <span asp-validation-for="EventDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Organizer -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Organizer*</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Organizer" />
+                    <span asp-validation-for="Organizer" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Event Location -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Event Location*</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Location" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Event Description -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Event Description and Pricing*</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" asp-for="Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Registration Details -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Registration Details</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" asp-for="RegistrationDetails"></textarea>
+                    <span asp-validation-for="RegistrationDetails" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Customer Support Contact -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Contact Details for Customer Support</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="CustomerSupportContactDetails" />
+                    <span asp-validation-for="CustomerSupportContactDetails" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="row mb-3">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <!-- Cancel Button -->
+                    <a href="@Url.Action("Index", "EventList")" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

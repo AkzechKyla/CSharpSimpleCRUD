@@ -19,6 +19,7 @@
             <th>Gender</th>
             <th>T-shirt Size</th>
             <th>Register Date</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -35,6 +36,12 @@
                 <td>@participant.Gender</td>
                 <td>@participant.TShirtSize</td>
                 <td>@participant.RegisterDate</td>
+                <td>
+                    <div class="d-grid">
+                        <a class="btn btn-primary btn-sm mb-1 w-100">Edit</a>
+                        <a class="btn btn-danger btn-sm w-100">Delete</a>
+                    </div>
+                </td>
             </tr>
         }
     </tbody>

@@ -11,5 +11,13 @@ namespace CSharpSimpleCRUD.Controllers
             List<ParticipantModel> participants = participantModel.FetchFromDatabase();
             return View(participants);
         }
+
+        // GET: Participants/Edit?id=123
+        public IActionResult Edit(int id)
+        {
+            ParticipantModel participant = new ParticipantModel().FetchFromDatabase(id);
+            return View(participant);
+        }
+
     }
 }

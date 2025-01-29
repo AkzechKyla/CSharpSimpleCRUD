@@ -116,5 +116,40 @@ namespace CSharpSimpleCRUD.Models
 
             return listParticipants;
         }
+
+        public ParticipantModel FetchFromDatabase(int id)
+        {
+            string connectionString = "Data Source=LAPTOP-GM3E4EUK;Initial Catalog=TestDatabase;Integrated Security=True;Trust Server Certificate=True";
+            ParticipantModel participant = new ParticipantModel();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Participants WHERE ParticipantId = @ParticipantId";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ParticipantId", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            participant.ParticipantId = reader.GetInt32(0).ToString();
+                            participant.FirstName = reader.GetString(1);
+                            participant.LastName = reader.GetString(2);
+                            participant.Address = reader.GetString(3);
+                            participant.PhoneNumber = reader.GetString(4);
+                            participant.Email = reader.GetString(5);
+                            participant.BirthDate = reader.GetDateTime(6);
+                            participant.Gender = reader.GetString(7);
+                            participant.TShirtSize = reader.GetString(8);
+                            participant.RegisterDate = reader.GetDateTime(9);
+                        }
+                    }
+                }
+            }
+
+            return participant;
+        }
     }
 }

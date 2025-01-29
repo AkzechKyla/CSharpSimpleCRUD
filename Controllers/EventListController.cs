@@ -40,5 +40,19 @@ namespace CSharpSimpleCRUD.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Delete(int id)
+        {
+            var eventItem = _context.Events.Find(id);
+
+            if (eventItem == null)
+            {
+                return NotFound();
+            }
+
+            _context.Events.Remove(eventItem);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }
